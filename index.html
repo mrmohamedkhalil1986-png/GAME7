@@ -1,0 +1,1280 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المسابقة السادسة - مدرسة السلطان فيصل بن تركي للبنين</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold-primary: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.4);
+            --oman-green: #064e3b;
+            --oman-red: #881337;
+        }
+        body { 
+            font-family: 'Baloo Bhaijaan 2', cursive; 
+            overflow-x: hidden; 
+            user-select: none; 
+            background: #0b1315; 
+            color: #f8fafc; 
+        }
+
+        .omani-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background-image: 
+                linear-gradient(to bottom, rgba(5, 18, 16, 0.85), rgba(12, 26, 23, 0.92)),
+                url('oman_bg.jpg'),
+                url('https://images.unsplash.com/photo-1596701062351-8c2c14d1fdd1?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .omani-pattern {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            opacity: 0.12;
+            background-image: 
+                radial-gradient(#d4af37 1.5px, transparent 1.5px), 
+                radial-gradient(#10b981 1px, transparent 1px);
+            background-size: 36px 36px;
+            background-position: 0 0, 18px 18px;
+        }
+
+        .circle-logo {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+            border: 3px solid #eab308;
+            box-shadow: 0 0 15px rgba(234, 179, 8, 0.4), inset 0 0 8px rgba(0, 0, 0, 0.5);
+            background: #ffffff;
+            transition: transform 0.3s ease;
+        }
+        .circle-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .luxury-card {
+            background: rgba(11, 28, 24, 0.86);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1.5px solid rgba(234, 179, 8, 0.4);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.15);
+            border-radius: 24px;
+        }
+
+        /* تنسيق مستطيل أسماء الفرق لتكون صورة champ خلفية له */
+        .champ-card-bg {
+            position: relative;
+            background-color: rgba(11, 28, 24, 0.9);
+            background-image: 
+                linear-gradient(rgba(7, 22, 18, 0.85), rgba(7, 22, 18, 0.90)),
+                url('champ.png'),
+                url('champ.jpg'),
+                url('champ.jpeg'),
+                url('champ.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1.5px solid rgba(234, 179, 8, 0.45);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.85), 0 0 25px rgba(212, 175, 55, 0.18);
+            border-radius: 24px;
+        }
+
+        .challenge-container {
+            background-color: rgba(11, 28, 24, 0.9);
+            background-image: 
+                linear-gradient(rgba(7, 20, 17, 0.65), rgba(7, 20, 17, 0.75)),
+                url('background.png'),
+                url('background.jpg'),
+                url('background.jpeg'),
+                url('background.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1.5px solid rgba(234, 179, 8, 0.45);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.85), 0 0 30px rgba(212, 175, 55, 0.15);
+            border-radius: 24px;
+        }
+
+        .quiz-option-btn {
+            background: rgba(18, 43, 37, 0.88);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 16px;
+            color: #f1f5f9;
+            box-shadow: 0 4px 0 rgba(7, 20, 17, 0.9);
+            transition: all 0.15s ease;
+            min-height: 4rem;
+            font-size: 1.15rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.65rem 1.25rem;
+            cursor: pointer;
+        }
+        .quiz-option-btn:hover:not(:disabled) {
+            background: rgba(27, 66, 57, 0.95);
+            border-color: #facc15;
+            transform: translateY(-2px);
+        }
+        .quiz-option-btn:active:not(:disabled) {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 rgba(7, 20, 17, 0.9);
+        }
+        .quiz-option-btn.correct {
+            background: #15803d !important;
+            border-color: #4ade80 !important;
+            box-shadow: 0 4px 0 #14532d !important;
+            color: #ffffff !important;
+        }
+        .quiz-option-btn.wrong {
+            background: #991b1b !important;
+            border-color: #f87171 !important;
+            box-shadow: 0 4px 0 #7f1d1d !important;
+            color: #ffffff !important;
+            opacity: 0.9;
+        }
+
+        .btn-action-gold {
+            background: linear-gradient(180deg, #facc15 0%, #ca8a04 100%);
+            color: #0f172a;
+            font-weight: 800;
+            border-radius: 9999px;
+            box-shadow: 0 6px 0 #854d0e, 0 12px 20px rgba(0,0,0,0.4);
+            transition: all 0.15s;
+        }
+        .btn-action-gold:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #854d0e, 0 4px 10px rgba(0,0,0,0.4);
+        }
+
+        .btn-action-blue {
+            background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+            color: #ffffff;
+            font-weight: 800;
+            border-radius: 9999px;
+            box-shadow: 0 6px 0 #0369a1, 0 12px 20px rgba(0,0,0,0.4);
+            transition: all 0.15s;
+        }
+        .btn-action-blue:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #0369a1;
+        }
+
+        .wheel-svg {
+            transition: transform 4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            border-radius: 50%;
+            box-shadow: 0 0 0 8px #d4af37, 0 0 35px rgba(212, 175, 55, 0.4);
+        }
+
+        .divider-line {
+            filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.9));
+        }
+
+        /* تنسيقات الوسائل البصرية الاحترافية داخل الأسئلة */
+        .visual-box {
+            background: rgba(6, 22, 18, 0.75);
+            border: 1.5px solid rgba(250, 204, 21, 0.35);
+            border-radius: 18px;
+            padding: 12px 16px;
+            margin-bottom: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
+        }
+        .digital-lcd {
+            background: #020617;
+            border: 3px solid #eab308;
+            border-radius: 14px;
+            padding: 8px 22px;
+            font-family: monospace, sans-serif;
+            font-size: 2.1rem;
+            font-weight: 900;
+            color: #4ade80;
+            letter-spacing: 3px;
+            text-shadow: 0 0 12px rgba(74, 222, 128, 0.65);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.6), inset 0 0 10px rgba(74, 222, 128, 0.15);
+            display: inline-block;
+            direction: ltr;
+        }
+        .schedule-table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 440px;
+            font-size: 0.95rem;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(234, 179, 8, 0.4);
+        }
+        .schedule-table th {
+            background: rgba(234, 179, 8, 0.25);
+            color: #fde047;
+            padding: 6px 12px;
+            border: 1px solid rgba(234, 179, 8, 0.3);
+            font-weight: 800;
+        }
+        .schedule-table td {
+            background: rgba(15, 38, 32, 0.85);
+            color: #f8fafc;
+            padding: 6px 12px;
+            border: 1px solid rgba(234, 179, 8, 0.2);
+            text-align: center;
+            font-weight: 700;
+        }
+        .cal-box {
+            background: #091e1a;
+            border: 2px solid #eab308;
+            border-radius: 14px;
+            overflow: hidden;
+            width: 270px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+        }
+        .cal-title {
+            background: linear-gradient(90deg, #b45309, #eab308, #b45309);
+            color: #091e1a;
+            font-weight: 900;
+            padding: 4px;
+            font-size: 1rem;
+            text-align: center;
+        }
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            padding: 6px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+        .cal-day-head {
+            color: #fde047;
+            font-weight: 800;
+            padding-bottom: 3px;
+            border-bottom: 1px solid rgba(234,179,8,0.3);
+        }
+        .cal-cell {
+            padding: 3px 0;
+            border-radius: 6px;
+            color: #e2e8f0;
+            font-weight: 700;
+        }
+        .cal-cell.highlight {
+            background: #ef4444;
+            color: #ffffff;
+            font-weight: 900;
+            box-shadow: 0 0 8px #ef4444;
+            border: 1px solid #fca5a5;
+        }
+        .cal-cell.range {
+            background: rgba(16, 185, 129, 0.35);
+            color: #6ee7b7;
+            border: 1px dashed #34d399;
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col justify-between p-3 md:p-6">
+
+    <!-- عنصر الصوت المباشر -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="back.mp3" type="audio/mpeg">
+        <source src="back.wav" type="audio/wav">
+        <source src="back.ogg" type="audio/ogg">
+        <source src="back.m4a" type="audio/mp4">
+        <source src="game_audio.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="omani-bg"></div>
+    <div class="omani-pattern"></div>
+
+    <!-- شريط الرأس -->
+    <header class="w-full max-w-7xl mx-auto luxury-card px-4 py-2.5 flex items-center justify-between border-b-2 border-yellow-500/50 shadow-lg z-30 mb-4">
+        <div class="flex items-center gap-3">
+            <img src="school.png" onerror="tryNextExt(this, ['school.jpg', 'school.jpeg', 'school.webp'])" alt="شعار المدرسة" class="circle-logo">
+            <div class="hidden sm:block text-right">
+                <h3 class="text-sm font-bold text-yellow-400">سلطنة عمان - وزارة التربية والتعليم</h3>
+                <h2 class="text-base md:text-lg font-black text-white">مدرسة السلطان فيصل بن تركي للبنين</h2>
+            </div>
+        </div>
+
+        <div class="text-center px-2">
+            <div class="inline-block bg-gradient-to-r from-emerald-700/80 to-red-800/80 border border-yellow-400/50 rounded-full px-5 py-1 text-xs md:text-sm font-black text-yellow-300 shadow-md">
+                🇴🇲 الرياضيات - الصف السادس
+            </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <div class="hidden sm:block text-left">
+                <h3 class="text-sm font-bold text-yellow-400">المسابقة السادسة</h3>
+                <h2 class="text-base md:text-lg font-black text-emerald-300">أسرة الرياضيات</h2>
+            </div>
+            <img src="math.png" onerror="tryNextExt(this, ['math.jpg', 'math.jpeg', 'math.webp'])" alt="شعار أسرة الرياضيات" class="circle-logo">
+        </div>
+    </header>
+
+    <!-- منطقة التحكم بالصوت وزر الرجوع الثابت -->
+    <div class="fixed bottom-4 left-4 z-50 flex items-center gap-2">
+        <button id="muteBtn" onclick="toggleMute()" title="كتم / تشغيل الصوت" class="bg-emerald-950/90 text-yellow-400 p-3.5 rounded-full shadow-2xl border-2 border-yellow-500/50 text-xl hover:scale-110 active:scale-95 transition-transform cursor-pointer">
+            🔊
+        </button>
+        <button id="floatingHomeBtn" onclick="confirmGoHome()" title="الرجوع للرئيسية والبدء من جديد" class="hidden bg-red-950/90 hover:bg-red-900 text-yellow-300 border-2 border-yellow-500/50 px-3.5 py-2.5 rounded-2xl shadow-2xl text-sm font-bold transition-all hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-1.5">
+            <span>🏠</span>
+            <span class="hidden sm:inline">الرئيسية</span>
+        </button>
+        <label id="filePickerLabel" title="اضغط هنا لتحديد ملف الصوت من جهازك إذا لم يعمل تلقائياً" class="hidden cursor-pointer bg-red-950/90 hover:bg-red-900 border border-yellow-400/60 text-yellow-300 text-xs px-3 py-2 rounded-xl shadow-lg transition-colors">
+            📁 اختر ملف back
+            <input type="file" id="audioPicker" accept="audio/*" class="hidden" onchange="loadCustomAudio(this)">
+        </label>
+    </div>
+
+    <!-- 1. شاشة البداية -->
+    <main id="startScreen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+        <div class="luxury-card max-w-xl w-full p-6 md:p-8 text-center border-2 border-yellow-500/60 flex flex-col items-center relative overflow-hidden">
+            <div class="flex items-center justify-center gap-6 mb-6">
+                <img src="school.png" onerror="tryNextExt(this, ['school.jpg', 'school.jpeg', 'school.webp'])" class="circle-logo w-24 h-24 md:w-28 md:h-28" alt="School">
+                <div class="h-16 w-0.5 bg-yellow-500/40"></div>
+                <img src="math.png" onerror="tryNextExt(this, ['math.jpg', 'math.jpeg', 'math.webp'])" class="circle-logo w-24 h-24 md:w-28 md:h-28" alt="Math">
+            </div>
+
+            <h1 class="text-3xl md:text-5xl font-black text-yellow-400 mb-2">المسابقة السادسة</h1>
+            <h2 class="text-2xl md:text-4xl font-black text-white mb-1">مادة الرياضيات</h2>
+            <p class="text-lg md:text-2xl font-bold text-emerald-400 mb-2">درسا: الجداول الزمنية والتقويمات</p>
+            <p class="text-sm md:text-base text-slate-300 font-semibold mb-6">مدرسة السلطان فيصل بن تركي للبنين</p>
+
+            <button onclick="startGame()" class="btn-action-gold text-xl md:text-2xl px-12 py-3.5 w-full max-w-sm mb-2 cursor-pointer">
+                🚀 ابدأ المسابقة
+            </button>
+        </div>
+    </main>
+
+    <!-- 2. ساحة التحدي -->
+    <main id="gameScreen" class="hidden flex-1 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+        <aside class="lg:col-span-4 flex flex-col gap-4">
+            
+            <!-- مستطيل الدور الحالي بخلفية champ -->
+            <div class="champ-card-bg p-4 text-center border-yellow-500/50 flex items-center justify-between gap-3 shadow-lg">
+                <span class="text-sm text-yellow-300 font-bold">الدور الحالي:</span>
+                <span id="currentTeamName" class="text-lg md:text-xl font-black text-white bg-black/40 border border-yellow-400/40 px-3 py-1 rounded-xl shadow-inner">فريق الصقور</span>
+            </div>
+
+            <!-- بوكس أسماء الفرق والمتصدرين بخلفية champ الممتدة بطول المستطيل -->
+            <div class="champ-card-bg p-4 flex-1 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between border-b border-yellow-500/30 pb-2 mb-3 bg-black/30 p-2 rounded-xl">
+                        <span class="font-bold text-yellow-400 text-base">لوحة الفرق والمتصدرين</span>
+                        <span class="text-xl">🏆</span>
+                    </div>
+                    <div id="scoreboard" class="space-y-2.5"></div>
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-yellow-500/30 text-center bg-black/30 py-2 rounded-xl flex items-center justify-between px-3">
+                    <div>
+                        <span class="text-sm text-emerald-200/90 font-bold">رقم التحدي: </span>
+                        <span id="qNum" class="text-lg font-black text-yellow-400">1</span>
+                        <span class="text-sm text-emerald-200/90 font-bold"> / 32</span>
+                    </div>
+
+                    <!-- زر الرجوع إلى الواجهة الرئيسية والبدء من جديد -->
+                    <button onclick="confirmGoHome()" class="bg-red-800/80 hover:bg-red-700 text-white border border-yellow-400/50 rounded-xl px-3 py-1.5 text-xs font-bold transition-transform active:scale-95 flex items-center gap-1 cursor-pointer">
+                        <span>🏠</span>
+                        <span>الرئيسية</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- مربع السؤال والقرص -->
+        <section class="lg:col-span-8 challenge-container p-4 md:p-6 flex flex-col items-center justify-center relative min-h-[480px]">
+            <div id="wheelSection" class="w-full flex flex-col items-center justify-center py-2">
+                <div class="relative mb-6">
+                    <div class="absolute -top-6 left-1/2 -translate-x-1/2 z-30 drop-shadow-md">
+                        <svg width="46" height="54" viewBox="0 0 50 60">
+                            <path d="M25 60 L0 0 L50 0 Z" fill="#eab308" stroke="#ffffff" stroke-width="2"/>
+                            <circle cx="25" cy="10" r="6" fill="#854d0e"/>
+                        </svg>
+                    </div>
+
+                    <!-- قرص الدوران مع خطوط فواصل بارزة بين المثلثات -->
+                    <svg id="wheel" class="wheel-svg w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] md:w-[400px] md:h-[400px]" viewBox="0 0 400 400">
+                        <defs id="wheelDefs"></defs>
+                        <circle cx="200" cy="200" r="198" fill="#0d2822"/>
+                        <g id="wheelSegments"></g>
+                        <g id="wheelImages"></g>
+                        <g id="wheelDividers"></g>
+                    </svg>
+
+                    <!-- الشعار في مركز القرص -->
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-yellow-400 overflow-hidden shadow-2xl bg-slate-900 flex items-center justify-center">
+                            <img src="logo.png" onerror="tryNextExt(this, ['logo.jpg', 'logo.jpeg', 'logo.webp'])" class="w-full h-full object-cover" alt="Center Logo">
+                        </div>
+                    </div>
+                </div>
+
+                <button id="spinBtn" onclick="triggerSpin()" class="btn-action-gold text-lg md:text-xl px-10 py-3 cursor-pointer">
+                    🎲 قم بتدوير القرص
+                </button>
+            </div>
+
+            <div id="questionSection" class="hidden w-full flex-col items-center justify-center">
+                <div class="mb-3 flex justify-center">
+                    <div class="w-14 h-14 rounded-full bg-emerald-950/90 border-4 border-yellow-400 flex items-center justify-center shadow-lg">
+                        <span id="timer" class="text-xl font-black text-yellow-400">60</span>
+                    </div>
+                </div>
+
+                <!-- صندوق السؤال والوسيلة البصرية الاحترافية -->
+                <div class="w-full bg-emerald-950/85 border border-yellow-500/40 rounded-2xl p-4 md:p-5 mb-4 text-center shadow-lg backdrop-blur-sm">
+                    <div id="qVisual" class="hidden visual-box"></div>
+                    <p id="qText" class="text-lg md:text-xl font-bold text-white leading-relaxed"></p>
+                </div>
+
+                <div id="optionsGrid" class="w-full grid grid-cols-1 md:grid-cols-2 gap-3 mb-3"></div>
+
+                <button id="nextBtn" onclick="resolveAnswer()" class="hidden btn-action-blue text-lg px-8 py-2 mt-1 cursor-pointer">
+                    السؤال التالي ⬅️
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- 3. شاشة النتائج -->
+    <div id="resultScreen" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="luxury-card max-w-lg w-full p-8 text-center border-2 border-yellow-500 flex flex-col items-center">
+            <div class="text-6xl mb-3">🏆</div>
+            <h2 class="text-3xl md:text-4xl font-black text-yellow-400 mb-4">انتهت المسابقة السادسة!</h2>
+            <div id="finalRanking" class="space-y-2 mb-6 text-right w-full"></div>
+            <button onclick="resetToHome()" class="btn-action-gold text-lg font-black py-3 px-8 w-full cursor-pointer">
+                🔄 مسابقة جديدة والبدء من جديد
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function tryNextExt(imgEl, exts) {
+            if (!imgEl.dataset.extIndex) imgEl.dataset.extIndex = "0";
+            let idx = parseInt(imgEl.dataset.extIndex);
+            if (idx < exts.length) {
+                imgEl.src = exts[idx];
+                imgEl.dataset.extIndex = (idx + 1).toString();
+            } else {
+                imgEl.onerror = null;
+            }
+        }
+
+        const bgAudio = document.getElementById('bgMusic');
+        bgAudio.volume = 1.0;
+
+        const sfx = {
+            correct: new Audio('correct.mp3'),
+            wrong: new Audio('wrong.mp3'),
+            spin: new Audio('spin.mp3')
+        };
+
+        let isMuted = false;
+
+        bgAudio.addEventListener('error', () => {
+            console.warn("تعذر العثور على الملف تلقائياً.");
+            document.getElementById('filePickerLabel').classList.remove('hidden');
+        });
+
+        function playBackgroundMusic() {
+            if (isMuted) return;
+            bgAudio.volume = 1.0;
+            const playPromise = bgAudio.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(err => {
+                    console.log("تنبيه تشغيل الصوت:", err);
+                    document.getElementById('filePickerLabel').classList.remove('hidden');
+                });
+            }
+        }
+
+        function loadCustomAudio(input) {
+            if (input.files && input.files[0]) {
+                const fileURL = URL.createObjectURL(input.files[0]);
+                bgAudio.src = fileURL;
+                bgAudio.load();
+                if (!isMuted) bgAudio.play();
+                document.getElementById('filePickerLabel').classList.add('hidden');
+            }
+        }
+
+        /* =========================================================
+           دوال توليد الوسائل البصرية الاحترافية (ساعات، تقويمات، جداول)
+           ========================================================= */
+
+        // 1. دالة رسم ساعة حائط احترافية (SVG)
+        function createClockSVG(hours, minutes, label = '', size = 135) {
+            const hAngle = ((hours % 12) + minutes / 60) * 30;
+            const mAngle = minutes * 6;
+            
+            let ticks = '';
+            for (let i = 0; i < 60; i++) {
+                const angle = i * 6;
+                const isMajor = i % 5 === 0;
+                const r1 = isMajor ? 74 : 78;
+                const r2 = 82;
+                const x1 = 100 + r1 * Math.sin(angle * Math.PI / 180);
+                const y1 = 100 - r1 * Math.cos(angle * Math.PI / 180);
+                const x2 = 100 + r2 * Math.sin(angle * Math.PI / 180);
+                const y2 = 100 - r2 * Math.cos(angle * Math.PI / 180);
+                ticks += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${isMajor ? '#0f172a' : '#64748b'}" stroke-width="${isMajor ? '2.5' : '1'}" stroke-linecap="round"/>`;
+            }
+
+            let numbers = '';
+            for (let n = 1; n <= 12; n++) {
+                const angle = n * 30;
+                const r = 61;
+                const x = 100 + r * Math.sin(angle * Math.PI / 180);
+                const y = 100 - r * Math.cos(angle * Math.PI / 180) + 5;
+                numbers += `<text x="${x}" y="${y}" text-anchor="middle" font-size="15" font-weight="800" fill="#0f172a" font-family="sans-serif">${n}</text>`;
+            }
+
+            const hx = 100 + 40 * Math.sin(hAngle * Math.PI / 180);
+            const hy = 100 - 40 * Math.cos(hAngle * Math.PI / 180);
+            const mx = 100 + 58 * Math.sin(mAngle * Math.PI / 180);
+            const my = 100 - 58 * Math.cos(mAngle * Math.PI / 180);
+
+            return `
+                <div class="flex flex-col items-center">
+                    <svg width="${size}" height="${size}" viewBox="0 0 200 200" class="drop-shadow-xl">
+                        <defs>
+                            <radialGradient id="clockGrad" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#ffffff"/>
+                                <stop offset="90%" stop-color="#f1f5f9"/>
+                                <stop offset="100%" stop-color="#cbd5e1"/>
+                            </radialGradient>
+                        </defs>
+                        <circle cx="100" cy="100" r="92" fill="#d4af37" stroke="#78350f" stroke-width="4"/>
+                        <circle cx="100" cy="100" r="85" fill="url(#clockGrad)" stroke="#0f172a" stroke-width="2"/>
+                        ${ticks}
+                        ${numbers}
+                        <!-- عقرب الساعات -->
+                        <line x1="100" y1="100" x2="${hx}" y2="${hy}" stroke="#0f172a" stroke-width="6.5" stroke-linecap="round"/>
+                        <!-- عقرب الدقائق -->
+                        <line x1="100" y1="100" x2="${mx}" y2="${my}" stroke="#dc2626" stroke-width="4" stroke-linecap="round"/>
+                        <circle cx="100" cy="100" r="6" fill="#d4af37" stroke="#0f172a" stroke-width="2"/>
+                    </svg>
+                    ${label ? `<span class="mt-1.5 bg-yellow-500/20 border border-yellow-400/50 text-yellow-300 text-xs font-extrabold px-3 py-0.5 rounded-full">${label}</span>` : ''}
+                </div>
+            `;
+        }
+
+        // 2. دالة رسم ساعة رقمية احترافية
+        function createDigitalClock(timeStr, periodLabel = '') {
+            return `
+                <div class="flex flex-col items-center">
+                    <div class="digital-lcd">${timeStr}</div>
+                    ${periodLabel ? `<span class="mt-1.5 text-xs font-bold text-emerald-300 bg-emerald-950/90 border border-emerald-500/40 px-3 py-0.5 rounded-full">${periodLabel}</span>` : ''}
+                </div>
+            `;
+        }
+
+        // 3. دالة رسم جدول الحافلات الزمني
+        function createBusTimetable(highlightCol = 0) {
+            return `
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>المحطة</th>
+                            <th class="${highlightCol === 1 ? 'bg-yellow-500/50 text-white' : ''}">الحافلة (1)</th>
+                            <th class="${highlightCol === 2 ? 'bg-yellow-500/50 text-white' : ''}">الحافلة (2)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-yellow-300">مسقط</td>
+                            <td>10:15</td>
+                            <td>12:45</td>
+                        </tr>
+                        <tr>
+                            <td class="text-yellow-300">سمائل</td>
+                            <td>11:01</td>
+                            <td>13:31</td>
+                        </tr>
+                        <tr>
+                            <td class="text-yellow-300">نزوى</td>
+                            <td>12:45</td>
+                            <td>15:15</td>
+                        </tr>
+                        <tr>
+                            <td class="text-yellow-300">عبري</td>
+                            <td>14:15</td>
+                            <td>16:45</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+        }
+
+        // 4. دالة رسم تقويم شهري احترافي
+        function createCalendarVisual(title, totalDays, startDayOffset, highlightDays = [], rangeDays = []) {
+            const daysAr = ['أحد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'];
+            let cells = '';
+            daysAr.forEach(d => { cells += `<div class="cal-day-head">${d}</div>`; });
+            for (let i = 0; i < startDayOffset; i++) {
+                cells += `<div class="cal-cell"></div>`;
+            }
+            for (let d = 1; d <= totalDays; d++) {
+                let cls = 'cal-cell';
+                if (highlightDays.includes(d)) cls += ' highlight';
+                else if (rangeDays.includes(d)) cls += ' range';
+                cells += `<div class="${cls}">${d}</div>`;
+            }
+            return `
+                <div class="cal-box">
+                    <div class="cal-title">${title}</div>
+                    <div class="cal-grid">${cells}</div>
+                </div>
+            `;
+        }
+
+        const teams = ['فريق الصقور 🦅', 'فريق النمور 🐅', 'فريق الأسود 🦁', 'فريق النسور 🦅'];
+        let rotation = 0; 
+        let isSpinning = false;
+        let state = { qList: [], currentQ: null, scores: [0,0,0,0], turn: 0, qCount: 0, timer: null };
+
+        const colors = ['#047857', '#b91c1c', '#d97706', '#0f766e', '#854d0e', '#15803d', '#991b1b', '#0369a1'];
+        const charNames = ['char1', 'char2', 'char3', 'char4', 'char5', 'char6', 'char7', 'char8'];
+
+        /* =========================================================
+           قائمة الـ 32 سؤالاً (مستوى متوسط + 22 سؤالاً بوسائل بصرية مدمجة)
+           ========================================================= */
+        const questions = [
+            // 1. (وسيلة بصرية: ساعة عقارب 3:30)
+            {
+                q: "اكتب الوقت الذي تشير إليه الساعة المقابلة رقمياً بنظام 24 ساعة إذا كان الوقت بعد الظهر:",
+                v: createClockSVG(3, 30, "فترة بعد الظهر"),
+                o: ["15:30", "13:30", "03:30", "14:30"],
+                a: 0
+            },
+            // 2. (وسيلة بصرية: ساعة عقارب 7:15)
+            {
+                q: "ما الوقت بنظام 24 ساعة المشار إليه في ساعة الحائط المقابلة حيث يشير الوقت إلى فترة المساء؟",
+                v: createClockSVG(7, 15, "فترة المساء"),
+                o: ["19:15", "18:15", "17:15", "16:15"],
+                a: 0
+            },
+            // 3. (وسيلة بصرية: ساعة عقارب 4:45)
+            {
+                q: "اكتب الوقت الموضح في الساعة المقابلة رقمياً بنظام 24 ساعة إذا كان الوقت بعد الظهر:",
+                v: createClockSVG(4, 45, "فترة بعد الظهر"),
+                o: ["16:45", "15:45", "16:15", "04:45"],
+                a: 0
+            },
+            // 4. (وسيلة بصرية: ساعة عقارب 6:50)
+            {
+                q: "ما الوقت الذي تشير إليه ساعة الحائط الموضحة بالشكل المقابل؟",
+                v: createClockSVG(6, 50, "قراءة الوقت"),
+                o: ["6:50", "7:50", "6:10", "7:10"],
+                a: 0
+            },
+            // 5. (وسيلة بصرية: ساعة رقمية 14:30)
+            {
+                q: "في الساعة الرقمية المقابلة، كيف يُكتب هذا الوقت بنظام 12 ساعة؟",
+                v: createDigitalClock("14:30", "نظام 24 ساعة"),
+                o: ["2:30 مساءً", "4:30 مساءً", "2:30 صباحاً", "12:30 مساءً"],
+                a: 0
+            },
+            // 6. (وسيلة بصرية: بطاقات وصول 3 طلاب)
+            {
+                q: "يتحدث 3 طلاب عن وقت وصولهم للحفل كما في البطاقات أعلاه. أي الأشخاص وصل إلى الحفل مبكراً؟",
+                v: `
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <div class="bg-slate-900 border-2 border-yellow-500/60 px-4 py-2 rounded-xl text-center">
+                            <div class="text-xs text-yellow-300 font-bold mb-1">مصطفى</div>
+                            <div class="text-lg font-black text-white">3:05 م</div>
+                        </div>
+                        <div class="bg-slate-900 border-2 border-yellow-500/60 px-4 py-2 rounded-xl text-center">
+                            <div class="text-xs text-yellow-300 font-bold mb-1">عبد الله</div>
+                            <div class="text-lg font-black text-white">15:15</div>
+                        </div>
+                        <div class="bg-slate-900 border-2 border-yellow-500/60 px-4 py-2 rounded-xl text-center">
+                            <div class="text-xs text-yellow-300 font-bold mb-1">خالد</div>
+                            <div class="text-lg font-black text-white">الثالثة إلا ربع مساءً</div>
+                        </div>
+                    </div>
+                `,
+                o: ["خالد", "مصطفى", "عبد الله", "وصلوا جميعاً بنفس الوقت"],
+                a: 0
+            },
+            // 7. (وسيلة بصرية: شاشة رقمية فارغة + فقاعة كلام عمار)
+            {
+                q: "وصل عمار إلى المدرسة الساعة (السابعة إلا رُبع صباحاً). كيف يُكتب هذا الوقت في الساعة الرقمية بنظام 24 ساعة؟",
+                v: `
+                    <div class="flex items-center gap-4">
+                        <div class="bg-emerald-900/60 border border-yellow-400/50 px-4 py-2 rounded-2xl text-sm font-bold text-yellow-200">
+                            💬 "وصلت للمدرسة السابعة إلا ربع صباحاً"
+                        </div>
+                        <div class="digital-lcd">??:??</div>
+                    </div>
+                `,
+                o: ["06:45", "07:45", "07:15", "18:45"],
+                a: 0
+            },
+            // 8. (وسيلة بصرية: ساعة عقارب 4:30 + دوران 90 درجة)
+            {
+                q: "تشير الساعة المقابلة إلى الرابعة والنصف. إذا دار عقرب الدقائق بزاوية (90°) باتجاه عقارب الساعة، فإلى أي عدد سيشير عقرب الدقائق؟",
+                v: createClockSVG(4, 30, "دوران عقرب الدقائق 90°"),
+                o: ["9", "6", "12", "3"],
+                a: 0
+            },
+            // 9. (وسيلة بصرية: ساعتان رقمية وتناظرية للمقارنة)
+            {
+                q: "إحدى الساعتين بالشكل تتقدم بـ 3 دقائق، والأخرى تتأخر بـ 4 دقائق عن الوقت الفعلي. ما هو الوقت الفعلي الصحيح؟",
+                v: `
+                    <div class="flex items-center justify-center gap-6">
+                        ${createDigitalClock("11:58", "الساعة الأولى")}
+                        ${createClockSVG(12, 5, "الساعة الثانية (12:05)", 115)}
+                    </div>
+                `,
+                o: ["12:02", "12:01", "11:55", "12:00"],
+                a: 0
+            },
+            // 10. (وسيلة بصرية: جدول الحافلات الزمني - الحافلة 1)
+            {
+                q: "باستخدام الجدول الزمني للحافلات أعلاه، كم تستغرق الحافلة (1) للانتقال من مسقط إلى نزوى؟",
+                v: createBusTimetable(1),
+                o: ["ساعتان و 30 دقيقة", "ساعتان و 15 دقيقة", "ساعة و 45 دقيقة", "3 ساعات"],
+                a: 0
+            },
+            // 11. (وسيلة بصرية: جدول الحافلات الزمني - الحافلة 2)
+            {
+                q: "باستخدام الجدول الزمني للحافلات أعلاه، كم تستغرق الحافلة (2) للانتقال من سمائل إلى عبري؟",
+                v: createBusTimetable(2),
+                o: ["3 ساعات و 14 دقيقة", "ساعتان و 44 دقيقة", "3 ساعات و 30 دقيقة", "ساعتان و 14 دقيقة"],
+                a: 0
+            },
+            // 12. (وسيلة بصرية: ساعتا بدء وانتهاء واجبات سعيد)
+            {
+                q: "تشير الساعتان المجاورتان إلى توقيت بدء سعيد لواجباته المنزلية وتوقيت انتهائه منها. ما الوقت الذي استغرقه سعيد؟",
+                v: `
+                    <div class="flex items-center justify-center gap-6">
+                        ${createClockSVG(4, 10, "توقيت البدء مساءً (4:10)", 120)}
+                        <span class="text-2xl text-yellow-400 font-black">⬅️</span>
+                        ${createClockSVG(5, 45, "توقيت الانتهاء مساءً (5:45)", 120)}
+                    </div>
+                `,
+                o: ["ساعة و 35 دقيقة", "ساعة و 25 دقيقة", "ساعة و 45 دقيقة", "55 دقيقة"],
+                a: 0
+            },
+            // 13. (وسيلة بصرية: ساعتان رقميتان لرياضة المشي)
+            {
+                q: "يمارس أحمد رياضة المشي في الفترة الصباحية حسب ما هو موضح في الساعتين الرقميتين. احسب الفترة الزمنية التي قضاها في المشي:",
+                v: `
+                    <div class="flex items-center justify-center gap-4">
+                        ${createDigitalClock("06:20", "وقت البدء صباحاً")}
+                        <span class="text-2xl text-yellow-400 font-black">⬅️</span>
+                        ${createDigitalClock("07:15", "وقت الانتهاء صباحاً")}
+                    </div>
+                `,
+                o: ["55 دقيقة", "45 دقيقة", "ساعة و 5 دقائق", "50 دقيقة"],
+                a: 0
+            },
+            // 14. (وسيلة بصرية: بطاقة رحلة سعيد من دبا إلى مسقط)
+            {
+                q: "انطلق سعيد في رحلة من ولاية دبا إلى مسقط في نفس اليوم حسب الأوقات الموضحة. احسب زمن الرحلة:",
+                v: `
+                    <div class="flex items-center justify-center gap-4">
+                        ${createDigitalClock("15:45", "الانطلاق من دبا")}
+                        <span class="text-2xl text-yellow-400 font-black">🚗 ⬅️</span>
+                        ${createDigitalClock("20:35", "الوصول إلى مسقط")}
+                    </div>
+                `,
+                o: ["4 ساعات و 50 دقيقة", "5 ساعات و 10 دقائق", "4 ساعات و 30 دقيقة", "5 ساعات و 20 دقيقة"],
+                a: 0
+            },
+            // 15. (وسيلة بصرية: جدول صواب وخطأ للوحدات الزمنية)
+            {
+                q: "تأمل الجدول المقابل، أي العبارات الثلاث في الجدول تعتبر صحيحة علمياً؟",
+                v: `
+                    <table class="schedule-table">
+                        <thead>
+                            <tr><th>م</th><th>العبارة الزمنية</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>(أ)</td><td>في اليومين 36 ساعة</td></tr>
+                            <tr><td>(ب)</td><td>في السنة 12 شهراً</td></tr>
+                            <tr><td>(ج)</td><td>في اليوم الواحد 1400 دقيقة</td></tr>
+                        </tbody>
+                    </table>
+                `,
+                o: ["العبارة (ب) فقط", "العبارتان (أ) و (ب)", "العبارة (ج) فقط", "جميع العبارات صحيحة"],
+                a: 0
+            },
+            // 16. (وسيلة بصرية: بطاقات التوصيل بين الوحدات الزمنية)
+            {
+                q: "من خلال البطاقات المعروضة أعلاه، أي زوج من البطاقات متكافئ بشكل صحيح؟",
+                v: `
+                    <div class="flex flex-wrap justify-center gap-2.5">
+                        <span class="bg-amber-500/20 border border-amber-400 text-amber-200 px-3 py-1.5 rounded-xl font-bold">12 شهراً</span>
+                        <span class="bg-amber-500/20 border border-amber-400 text-amber-200 px-3 py-1.5 rounded-xl font-bold">14 يوماً</span>
+                        <span class="bg-amber-500/20 border border-amber-400 text-amber-200 px-3 py-1.5 rounded-xl font-bold">60 دقيقة</span>
+                        <span class="bg-emerald-500/20 border border-emerald-400 text-emerald-200 px-3 py-1.5 rounded-xl font-bold">أسبوعان</span>
+                        <span class="bg-emerald-500/20 border border-emerald-400 text-emerald-200 px-3 py-1.5 rounded-xl font-bold">سنة واحدة</span>
+                    </div>
+                `,
+                o: ["14 يوماً = أسبوعان ، 12 شهراً = سنة واحدة", "14 يوماً = سنة واحدة ، 60 دقيقة = يوم واحد", "12 شهراً = قرن واحد ، 14 يوماً = أسبوعان", "60 دقيقة = أسبوعان"],
+                a: 0
+            },
+            // 17. (وسيلة بصرية: مخطط تحويلات السنوات والأيام والأسابيع)
+            {
+                q: "أكمل الأعداد المناسبة في الصناديق الفارغة بالترتيب من الأعلى إلى الأسفل:",
+                v: `
+                    <div class="flex flex-col gap-2 w-full max-w-xs text-sm font-black">
+                        <div class="flex justify-between items-center bg-slate-900/90 px-4 py-1.5 rounded-xl border border-yellow-500/40">
+                            <span class="text-yellow-300">36 شهراً =</span>
+                            <span class="bg-yellow-500/20 border border-yellow-400 px-3 py-0.5 rounded text-white">؟ سنوات</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-slate-900/90 px-4 py-1.5 rounded-xl border border-yellow-500/40">
+                            <span class="text-yellow-300">48 ساعة =</span>
+                            <span class="bg-yellow-500/20 border border-yellow-400 px-3 py-0.5 rounded text-white">؟ أيام</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-slate-900/90 px-4 py-1.5 rounded-xl border border-yellow-500/40">
+                            <span class="text-yellow-300">28 يوماً =</span>
+                            <span class="bg-yellow-500/20 border border-yellow-400 px-3 py-0.5 rounded text-white">؟ أسابيع</span>
+                        </div>
+                    </div>
+                `,
+                o: ["3 سنوات ، يومان ، 4 أسابيع", "4 سنوات ، يومان ، 3 أسابيع", "3 سنوات ، 3 أيام ، 4 أسابيع", "سنتان ، 4 أيام ، 4 أسابيع"],
+                a: 0
+            },
+            // 18. (وسيلة بصرية: بطاقات ترتيب الفترات الزمنية تصاعدياً)
+            {
+                q: "رتب البطاقات الزمنية الموضحة أعلاه ترتيباً تصاعدياً من الأصغر إلى الأكبر:",
+                v: `
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <div class="bg-emerald-900 border-2 border-yellow-400 px-3 py-2 rounded-xl font-black text-white">3 أيام</div>
+                        <div class="bg-emerald-900 border-2 border-yellow-400 px-3 py-2 rounded-xl font-black text-white">24 ساعة</div>
+                        <div class="bg-emerald-900 border-2 border-yellow-400 px-3 py-2 rounded-xl font-black text-white">أسبوع واحد</div>
+                        <div class="bg-emerald-900 border-2 border-yellow-400 px-3 py-2 rounded-xl font-black text-white">120 دقيقة</div>
+                    </div>
+                `,
+                o: ["120 دقيقة ، 24 ساعة ، 3 أيام ، أسبوع واحد", "24 ساعة ، 120 دقيقة ، 3 أيام ، أسبوع واحد", "120 دقيقة ، 3 أيام ، 24 ساعة ، أسبوع واحد", "أسبوع واحد ، 3 أيام ، 24 ساعة ، 120 دقيقة"],
+                a: 0
+            },
+            // 19. (وسيلة بصرية: جدول مقارنات الساعات والدقائق)
+            {
+                q: "افحص العبارتين في الجدول أعلاه، وحدد أيهما صواب وأيهما خطأ:",
+                v: `
+                    <table class="schedule-table">
+                        <thead>
+                            <tr><th>العبارة الأولى</th><th>العبارة الثانية</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-lg">2.5 يوم &gt; 72 ساعة</td>
+                                <td class="text-lg">5 ساعات = 300 دقيقة</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `,
+                o: ["الأولى خطأ ، والثانية صواب", "الأولى صواب ، والثانية خطأ", "كلتاهما صواب", "كلتاهما خطأ"],
+                a: 0
+            },
+            // 20. (وسيلة بصرية: تقويم شهر به 31 يوماً وتاريخ 26 محوط)
+            {
+                q: "في التقويم المقابل، إذا كان التاريخ المحوط بالأحمر (26) هو تاريخ اليوم، وكان عيد ميلاد سالم بعد 10 أيام، فما تاريخ عيد ميلاده؟",
+                v: createCalendarVisual("تقويم الشهر (31 يوماً)", 31, 3, [26]),
+                o: ["5 من الشهر التالي", "6 من الشهر التالي", "4 من الشهر التالي", "36 من نفس الشهر"],
+                a: 0
+            },
+            // 21. (وسيلة بصرية: تقويم شهر يوليو للمركز الصيفي)
+            {
+                q: "أعلن المركز الصيفي عن بدء الفعاليات من تاريخ 6 يوليو وحتى 29 يوليو كما هو مظلل بالتقويم. كم تبلغ هذه المدة بالأسابيع والأيام؟",
+                v: createCalendarVisual("يوليو", 31, 1, [6, 29], [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]),
+                o: ["3 أسابيع و يومان (23 يوماً)", "3 أسابيع تماماً (21 يوماً)", "4 أسابيع و يوم واحد", "أسبوعان و 5 أيام"],
+                a: 0
+            },
+            // 22. (وسيلة بصرية: تقويم شهر نوفمبر لرحلة عبدالله)
+            {
+                q: "سافر عبدالله إلى بريطانيا يوم الأربعاء 14 نوفمبر (المحدد بالأحمر) مستغرقاً في رحلته 3 أسابيع. ما تاريخ عودة عبدالله؟",
+                v: createCalendarVisual("نوفمبر (30 يوماً)", 30, 4, [14]),
+                o: ["5 ديسمبر", "4 ديسمبر", "28 نوفمبر", "7 ديسمبر"],
+                a: 0
+            },
+
+            // 10 أسئلة نصية متوسطة ومباشرة بدون تعقيد
+            // 23.
+            {
+                q: "يبدأ برنامج تلفزيوني الساعة 7:30 مساءً وينتهي الساعة 9:15 مساءً. ما المدة التي يستغرقها البرنامج؟",
+                o: ["ساعة و 45 دقيقة", "ساعتان و 15 دقيقة", "ساعة و 30 دقيقة", "ساعتان و 45 دقيقة"],
+                a: 0
+            },
+            // 24.
+            {
+                q: "وصلت عائشة إلى منزل جدتها الساعة 9:35 صباحاً وغادرت الساعة 11:45 صباحاً. كم استغرقت زيارتها؟",
+                o: ["ساعتان و 10 دقائق", "ساعتان و 15 دقيقة", "ساعة و 50 دقيقة", "ساعتان و 5 دقائق"],
+                a: 0
+            },
+            // 25.
+            {
+                q: "إذا خرج عمار من المدرسة في الساعة 15:20 ووصل إلى المنزل الساعة 15:45، فكم دقيقة استغرق للوصول إلى المنزل؟",
+                o: ["25 دقيقة", "35 دقيقة", "20 دقيقة", "30 دقيقة"],
+                a: 0
+            },
+            // 26.
+            {
+                q: "كيف تُكتب الساعة (السادسة إلا عشر دقائق مساءً) بالأرقام بنظام 12 ساعة ونظام 24 ساعة؟",
+                o: ["5:50 م / 17:50", "6:10 م / 18:10", "5:10 م / 17:10", "6:50 م / 18:50"],
+                a: 0
+            },
+            // 27.
+            {
+                q: "احسب عدد الساعات الموجودة في 5 أيام كاملة:",
+                o: ["120 ساعة", "100 ساعة", "144 ساعة", "96 ساعة"],
+                a: 0
+            },
+            // 28.
+            {
+                q: "تستغرق مريم في المذاكرة يومياً ساعة وربع الساعة. كم دقيقة تستغرقها مريم في المذاكرة؟",
+                o: ["75 دقيقة", "65 دقيقة", "85 دقيقة", "90 دقيقة"],
+                a: 0
+            },
+            // 29.
+            {
+                q: "تقول خديجة: (4 قرون و 3 عقود تساوي 340 سنة). هل ما تقوله خديجة صواب أم خطأ؟",
+                o: ["خطأ، لأنها تساوي 430 سنة", "صواب، لأنها تساوي 340 سنة", "خطأ، لأنها تساوي 403 سنوات", "خطأ، لأنها تساوي 70 سنة"],
+                a: 0
+            },
+            // 30.
+            {
+                q: "كم يساوي مجموع: (عدد الدقائق في ساعتين) + (عدد الأشهر في سنتين)؟",
+                o: ["120 دقيقة و 24 شهراً", "120 دقيقة و 12 شهراً", "60 دقيقة و 24 شهراً", "180 دقيقة و 36 شهراً"],
+                a: 0
+            },
+            // 31.
+            {
+                q: "وُلد أحمد بتاريخ 10 / 4 / 2012 م. كم يكون عُمر أحمد بالسنوات والأشهر والأيام في تاريخ 25 / 10 / 2019 م؟",
+                o: ["7 سنوات و 6 أشهر و 15 يوماً", "7 سنوات و 8 أشهر و 15 يوماً", "6 سنوات و 6 أشهر و 10 أيام", "8 سنوات و 4 أشهر و 15 يوماً"],
+                a: 0
+            },
+            // 32.
+            {
+                q: "احسب الفترة الزمنية بالشهور من تاريخ 20 أكتوبر 2018 م إلى تاريخ 20 نوفمبر 2020 م:",
+                o: ["25 شهراً", "24 شهراً", "13 شهراً", "26 شهراً"],
+                a: 0
+            }
+        ];
+
+        window.onload = () => {
+            const svgSegments = document.getElementById('wheelSegments');
+            const svgImages = document.getElementById('wheelImages');
+            const svgDividers = document.getElementById('wheelDividers');
+            const defs = document.getElementById('wheelDefs');
+            const count = 8; 
+            const slice = 360 / count;
+
+            for(let i=0; i<count; i++) {
+                const start = i * slice; 
+                const end = (i+1) * slice;
+                const x1 = 200 + 198 * Math.cos(Math.PI * (start-90)/180); 
+                const y1 = 200 + 198 * Math.sin(Math.PI * (start-90)/180);
+                const x2 = 200 + 198 * Math.cos(Math.PI * (end-90)/180); 
+                const y2 = 200 + 198 * Math.sin(Math.PI * (end-90)/180);
+                
+                const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                path.setAttribute("d", `M200,200 L${x1},${y1} A198,198 0 0,1 ${x2},${y2} Z`);
+                path.setAttribute("fill", colors[i % colors.length]); 
+                svgSegments.appendChild(path);
+                
+                const clip = document.createElementNS("http://www.w3.org/2000/svg", "clipPath");
+                clip.setAttribute("id", `clip-wedge-${i}`);
+                const clipPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                clipPath.setAttribute("d", `M200,200 L${x1},${y1} A198,198 0 0,1 ${x2},${y2} Z`);
+                clip.appendChild(clipPath);
+                defs.appendChild(clip);
+
+                const mid = start + slice / 2;
+                const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                g.setAttribute("clip-path", `url(#clip-wedge-${i})`);
+
+                const img = document.createElementNS("http://www.w3.org/2000/svg", "image");
+                const baseName = charNames[i];
+                
+                img.setAttribute("x", "110");
+                img.setAttribute("y", "2");
+                img.setAttribute("width", "180");
+                img.setAttribute("height", "200");
+                img.setAttribute("preserveAspectRatio", "xMidYMid slice");
+                img.setAttribute("transform", `rotate(${mid}, 200, 200)`);
+                
+                img.href.baseVal = `${baseName}.png`;
+                img.addEventListener('error', function errHandler() {
+                    if (this.href.baseVal.endsWith('.png')) {
+                        this.href.baseVal = `${baseName}.jpg`;
+                    } else if (this.href.baseVal.endsWith('.jpg')) {
+                        this.href.baseVal = `${baseName}.jpeg`;
+                    } else if (this.href.baseVal.endsWith('.jpeg')) {
+                        this.href.baseVal = `${baseName}.webp`;
+                    }
+                });
+
+                g.appendChild(img);
+                svgImages.appendChild(g);
+
+                const darkLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                darkLine.setAttribute("x1", "200");
+                darkLine.setAttribute("y1", "200");
+                darkLine.setAttribute("x2", x1);
+                darkLine.setAttribute("y2", y1);
+                darkLine.setAttribute("stroke", "#0b1315");
+                darkLine.setAttribute("stroke-width", "6");
+                svgDividers.appendChild(darkLine);
+
+                const goldLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                goldLine.setAttribute("x1", "200");
+                goldLine.setAttribute("y1", "200");
+                goldLine.setAttribute("x2", x1);
+                goldLine.setAttribute("y2", y1);
+                goldLine.setAttribute("stroke", "#facc15");
+                goldLine.setAttribute("stroke-width", "3.5");
+                goldLine.setAttribute("class", "divider-line");
+                svgDividers.appendChild(goldLine);
+            }
+
+            const outerRim = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            outerRim.setAttribute("cx", "200");
+            outerRim.setAttribute("cy", "200");
+            outerRim.setAttribute("r", "197");
+            outerRim.setAttribute("fill", "none");
+            outerRim.setAttribute("stroke", "#facc15");
+            outerRim.setAttribute("stroke-width", "3");
+            svgDividers.appendChild(outerRim);
+        };
+
+        function startGame() {
+            playBackgroundMusic();
+            
+            document.getElementById('startScreen').classList.add('hidden');
+            const gScreen = document.getElementById('gameScreen');
+            gScreen.classList.remove('hidden');
+            gScreen.classList.add('grid');
+            document.getElementById('floatingHomeBtn').classList.remove('hidden');
+            
+            state.qList = [...questions].sort(() => Math.random() - 0.5);
+            updateUI();
+        }
+
+        function confirmGoHome() {
+            if (confirm("هل ترغب فعلاً في العودة إلى الواجهة الرئيسية والبدء من جديد؟")) {
+                resetToHome();
+            }
+        }
+
+        function resetToHome() {
+            if(state.timer) clearInterval(state.timer);
+            isSpinning = false;
+            stopSfx('spin');
+            
+            state = { qList: [], currentQ: null, scores: [0,0,0,0], turn: 0, qCount: 0, timer: null };
+            rotation = 0;
+            const wheel = document.getElementById('wheel');
+            if (wheel) wheel.style.transform = `rotate(0deg)`;
+            
+            document.getElementById('gameScreen').classList.add('hidden');
+            document.getElementById('gameScreen').classList.remove('grid');
+            document.getElementById('resultScreen').classList.add('hidden');
+            document.getElementById('floatingHomeBtn').classList.add('hidden');
+            document.getElementById('startScreen').classList.remove('hidden');
+
+            const qSection = document.getElementById('questionSection');
+            const wheelSection = document.getElementById('wheelSection');
+            qSection.classList.add('hidden');
+            qSection.classList.remove('flex');
+            wheelSection.style.display = 'flex';
+            document.getElementById('nextBtn').classList.add('hidden');
+            document.getElementById('spinBtn').disabled = false;
+        }
+
+        function triggerSpin() {
+            if(isSpinning || state.qList.length === 0) return;
+            isSpinning = true;
+            document.getElementById('spinBtn').disabled = true;
+            
+            playSfx('spin');
+
+            const extraSpins = 1800; 
+            const randomAngle = Math.floor(Math.random() * 360);
+            rotation += extraSpins + randomAngle;
+            document.getElementById('wheel').style.transform = `rotate(${rotation}deg)`;
+            
+            setTimeout(() => { 
+                stopSfx('spin');
+                setTimeout(() => { 
+                    isSpinning = false; 
+                    document.getElementById('spinBtn').disabled = false;
+                    showQuestion(); 
+                }, 1200); 
+            }, 4000); 
+        }
+
+        function showQuestion() {
+            state.currentQ = state.qList.pop();
+            const qSection = document.getElementById('questionSection');
+            const wheelSection = document.getElementById('wheelSection');
+            
+            wheelSection.style.display = 'none'; 
+            document.getElementById('nextBtn').classList.add('hidden'); 
+            qSection.classList.remove('hidden');
+            qSection.classList.add('flex');
+
+            // عرض الوسيلة البصرية إن وجدت
+            const visualBox = document.getElementById('qVisual');
+            if (state.currentQ.v) {
+                visualBox.innerHTML = state.currentQ.v;
+                visualBox.classList.remove('hidden');
+            } else {
+                visualBox.innerHTML = '';
+                visualBox.classList.add('hidden');
+            }
+
+            document.getElementById('qText').textContent = state.currentQ.q;
+            const grid = document.getElementById('optionsGrid'); 
+            grid.innerHTML = '';
+            
+            let ops = state.currentQ.o.map((txt, i) => ({txt, i})).sort(() => Math.random() - 0.5);
+
+            ops.forEach((op) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option-btn w-full';
+                btn.textContent = op.txt; 
+                btn.onclick = () => checkAnswer(op.i, btn);
+                grid.appendChild(btn);
+            });
+            startTimer();
+        }
+
+        function startTimer() {
+            let t = 60; 
+            document.getElementById('timer').textContent = t;
+            if(state.timer) clearInterval(state.timer);
+            state.timer = setInterval(() => { 
+                t--; 
+                document.getElementById('timer').textContent = t; 
+                if(t <= 0) { clearInterval(state.timer); forceShowAnswer(); } 
+            }, 1000);
+        }
+
+        function forceShowAnswer() {
+            const btns = document.querySelectorAll('.quiz-option-btn');
+            btns.forEach(b => {
+                b.disabled = true;
+                if(b.textContent === state.currentQ.o[state.currentQ.a]) b.classList.add('correct');
+            });
+            playSfx('wrong');
+            document.getElementById('nextBtn').classList.remove('hidden');
+        }
+
+        function checkAnswer(idx, btn) {
+            clearInterval(state.timer);
+            const btns = document.querySelectorAll('.quiz-option-btn');
+            btns.forEach(b => b.disabled = true);
+            
+            if(idx === state.currentQ.a) {
+                btn.classList.add('correct'); 
+                playSfx('correct');
+                state.scores[state.turn]++;
+            } else {
+                btn.classList.add('wrong'); 
+                playSfx('wrong');
+                btns.forEach(b => { if(b.textContent === state.currentQ.o[state.currentQ.a]) b.classList.add('correct'); });
+            }
+            document.getElementById('nextBtn').classList.remove('hidden');
+        }
+
+        function resolveAnswer() {
+            state.qCount++; 
+            state.turn = (state.turn + 1) % 4;
+            if(state.qCount >= 32) endGame();
+            else {
+                const qSection = document.getElementById('questionSection');
+                qSection.classList.add('hidden');
+                qSection.classList.remove('flex');
+                document.getElementById('wheelSection').style.display = 'flex';
+                document.getElementById('qNum').textContent = state.qCount + 1;
+                updateUI();
+            }
+        }
+
+        function updateUI() {
+            document.getElementById('currentTeamName').textContent = teams[state.turn];
+            const board = document.getElementById('scoreboard'); 
+            board.innerHTML = '';
+            teams.forEach((t, i) => {
+                const div = document.createElement('div');
+                const isCurrent = (i === state.turn);
+                div.className = `flex justify-between items-center px-4 py-2.5 rounded-xl border backdrop-blur-sm transition-all ${
+                    isCurrent 
+                    ? 'bg-yellow-500/25 border-yellow-400 text-yellow-300 font-black shadow-lg scale-[1.02]' 
+                    : 'bg-black/50 border-emerald-900/60 text-slate-100 font-bold hover:bg-black/60'
+                }`;
+                div.innerHTML = `
+                    <span class="tracking-wide">${t}</span>
+                    <span class="font-black text-xl text-yellow-400 drop-shadow">${state.scores[i]}</span>
+                `;
+                board.appendChild(div);
+            });
+        }
+
+        function endGame() {
+            document.getElementById('gameScreen').classList.add('hidden'); 
+            document.getElementById('resultScreen').classList.remove('hidden');
+            const ranking = teams.map((t, i) => ({name: t, s: state.scores[i]})).sort((a,b) => b.s - a.s);
+            const rankDiv = document.getElementById('finalRanking');
+            rankDiv.innerHTML = '';
+            ranking.forEach((r, i) => {
+                rankDiv.innerHTML += `
+                    <div class="flex justify-between items-center p-3 rounded-xl bg-emerald-950/60 border border-yellow-500/30">
+                        <span class="font-bold text-white">#${i+1} ${r.name}</span>
+                        <span class="font-black text-xl text-yellow-400">${r.s} نقطة</span>
+                    </div>`;
+            });
+        }
+
+        function playSfx(name) { 
+            if(!isMuted && sfx[name]) { 
+                sfx[name].currentTime = 0; 
+                let p = sfx[name].play(); 
+                if(p) p.catch(()=>{}); 
+            } 
+        }
+
+        function stopSfx(name) {
+            if(sfx[name]) {
+                sfx[name].pause();
+                sfx[name].currentTime = 0;
+            }
+        }
+
+        function toggleMute() { 
+            isMuted = !isMuted; 
+            bgAudio.muted = isMuted;
+
+            Object.values(sfx).forEach(aud => {
+                aud.muted = isMuted;
+            });
+
+            document.getElementById('muteBtn').textContent = isMuted ? '🔇' : '🔊'; 
+            
+            if(!isMuted && bgAudio.paused) {
+                bgAudio.play().catch(()=>{});
+            }
+        }
+    </script>
+</body>
+</html>

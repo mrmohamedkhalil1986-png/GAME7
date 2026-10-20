@@ -367,24 +367,24 @@
             <!-- مستطيل الدور الحالي بخلفية champ -->
             <div class="champ-card-bg p-4 text-center border-yellow-500/50 flex items-center justify-between gap-3 shadow-lg">
                 <span class="text-sm text-yellow-300 font-bold">الدور الحالي:</span>
-                <span id="currentTeamName" class="text-lg md:text-xl font-black text-white bg-black/40 border border-yellow-400/40 px-3 py-1 rounded-xl shadow-inner">فريق الصقور</span>
+                <span id="currentTeamName" class="text-lg md:text-xl font-black text-white bg-black/40 border border-yellow-400/40 px-3 py-1 rounded-xl shadow-inner">فريق الصقور 🦅</span>
             </div>
 
             <!-- بوكس أسماء الفرق والمتصدرين بخلفية champ الممتدة بطول المستطيل -->
             <div class="champ-card-bg p-4 flex-1 flex flex-col justify-between">
                 <div>
                     <div class="flex items-center justify-between border-b border-yellow-500/30 pb-2 mb-3 bg-black/30 p-2 rounded-xl">
-                        <span class="font-bold text-yellow-400 text-base">لوحة الفرق والمتصدرين</span>
+                        <span class="font-bold text-yellow-400 text-base">لوحة الفرق والمتصدرين (6 فرق)</span>
                         <span class="text-xl">🏆</span>
                     </div>
-                    <div id="scoreboard" class="space-y-2.5"></div>
+                    <div id="scoreboard" class="space-y-2"></div>
                 </div>
 
                 <div class="mt-4 pt-3 border-t border-yellow-500/30 text-center bg-black/30 py-2 rounded-xl flex items-center justify-between px-3">
                     <div>
                         <span class="text-sm text-emerald-200/90 font-bold">رقم التحدي: </span>
                         <span id="qNum" class="text-lg font-black text-yellow-400">1</span>
-                        <span class="text-sm text-emerald-200/90 font-bold"> / 32</span>
+                        <span class="text-sm text-emerald-200/90 font-bold"> / 36</span>
                     </div>
 
                     <!-- زر الرجوع إلى الواجهة الرئيسية والبدء من جديد -->
@@ -547,7 +547,7 @@
             const hx = 100 + 40 * Math.sin(hAngle * Math.PI / 180);
             const hy = 100 - 40 * Math.cos(hAngle * Math.PI / 180);
             const mx = 100 + 58 * Math.sin(mAngle * Math.PI / 180);
-            const my = 100 - 58 * Math.cos(mAngle * Math.PI / 180);
+            const my = 100 - 58 * Math.cos(angle = mAngle * Math.PI / 180);
 
             return `
                 <div class="flex flex-col items-center">
@@ -643,16 +643,26 @@
             `;
         }
 
-        const teams = ['فريق الصقور 🦅', 'فريق النمور 🐅', 'فريق الأسود 🦁', 'فريق النسور 🦅'];
+        // تحديث عدد الفرق إلى 6 فرق
+        const teams = [
+            'فريق الصقور 🦅', 
+            'فريق النمور 🐅', 
+            'فريق الأسود 🦁', 
+            'فريق النسور 🦅',
+            'فريق الفهود 🐆',
+            'فريق الذئاب 🐺'
+        ];
+        const TOTAL_QUESTIONS = 36;
+
         let rotation = 0; 
         let isSpinning = false;
-        let state = { qList: [], currentQ: null, scores: [0,0,0,0], turn: 0, qCount: 0, timer: null };
+        let state = { qList: [], currentQ: null, scores: [0,0,0,0,0,0], turn: 0, qCount: 0, timer: null };
 
         const colors = ['#047857', '#b91c1c', '#d97706', '#0f766e', '#854d0e', '#15803d', '#991b1b', '#0369a1'];
         const charNames = ['char1', 'char2', 'char3', 'char4', 'char5', 'char6', 'char7', 'char8'];
 
         /* =========================================================
-           قائمة الـ 32 سؤالاً (مستوى متوسط + 22 سؤالاً بوسائل بصرية مدمجة)
+           قائمة الـ 36 سؤالاً (تم إضافة 4 أسئلة جديدة بنفس نمط المحتوى)
            ========================================================= */
         const questions = [
             // 1. (وسيلة بصرية: ساعة عقارب 3:30)
@@ -968,6 +978,37 @@
                 q: "احسب الفترة الزمنية بالشهور من تاريخ 20 أكتوبر 2018 م إلى تاريخ 20 نوفمبر 2020 م:",
                 o: ["25 شهراً", "24 شهراً", "13 شهراً", "26 شهراً"],
                 a: 0
+            },
+
+            /* =========================================================
+               الأسئلة الـ 4 الإضافية (من 33 إلى 36) بنفس المحتوى والأسلوب
+               ========================================================= */
+            // 33. (وسيلة بصرية: ساعة عقارب 8:20 مساءً)
+            {
+                q: "اكتب الوقت الذي تشير إليه الساعة المقابلة رقمياً بنظام 24 ساعة إذا كان الوقت في فترة المساء:",
+                v: createClockSVG(8, 20, "فترة المساء"),
+                o: ["20:20", "18:20", "08:20", "20:04"],
+                a: 0
+            },
+            // 34. (وسيلة بصرية: جدول الحافلات الزمني - الحافلة 1 من سمائل إلى عبري)
+            {
+                q: "باستخدام الجدول الزمني للحافلات أعلاه، كم تستغرق الحافلة (1) للانتقال من سمائل إلى عبري؟",
+                v: createBusTimetable(1),
+                o: ["3 ساعات و 14 دقيقة", "ساعتان و 44 دقيقة", "3 ساعات و 30 دقيقة", "4 ساعات و 14 دقيقة"],
+                a: 0
+            },
+            // 35. (وسيلة بصرية: تقويم شهر مايو - حساب تاريخ بعد أسبوعين و 3 أيام)
+            {
+                q: "في التقويم المقابل، إذا كان اليوم هو 8 مايو (المحدد بالأحمر)، وسيقام معرض الرياضيات بعد أسبوعين و 3 أيام، فما تاريخ إقامة المعرض؟",
+                v: createCalendarVisual("مايو (31 يوماً)", 31, 2, [8]),
+                o: ["25 مايو", "22 مايو", "24 مايو", "26 مايو"],
+                a: 0
+            },
+            // 36. (سؤال نصي على نفس نمط تحويلات العقود والسنوات والأشهر)
+            {
+                q: "كم سنة وكم شهراً في (3 عقود و 48 شهراً)؟",
+                o: ["34 سنة (أو 30 سنة و 48 شهراً)", "32 سنة", "36 سنة", "38 سنة"],
+                a: 0
             }
         ];
 
@@ -1081,7 +1122,7 @@
             isSpinning = false;
             stopSfx('spin');
             
-            state = { qList: [], currentQ: null, scores: [0,0,0,0], turn: 0, qCount: 0, timer: null };
+            state = { qList: [], currentQ: null, scores: [0,0,0,0,0,0], turn: 0, qCount: 0, timer: null };
             rotation = 0;
             const wheel = document.getElementById('wheel');
             if (wheel) wheel.style.transform = `rotate(0deg)`;
@@ -1199,8 +1240,8 @@
 
         function resolveAnswer() {
             state.qCount++; 
-            state.turn = (state.turn + 1) % 4;
-            if(state.qCount >= 32) endGame();
+            state.turn = (state.turn + 1) % teams.length;
+            if(state.qCount >= TOTAL_QUESTIONS) endGame();
             else {
                 const qSection = document.getElementById('questionSection');
                 qSection.classList.add('hidden');
@@ -1218,14 +1259,14 @@
             teams.forEach((t, i) => {
                 const div = document.createElement('div');
                 const isCurrent = (i === state.turn);
-                div.className = `flex justify-between items-center px-4 py-2.5 rounded-xl border backdrop-blur-sm transition-all ${
+                div.className = `flex justify-between items-center px-4 py-2 rounded-xl border backdrop-blur-sm transition-all ${
                     isCurrent 
                     ? 'bg-yellow-500/25 border-yellow-400 text-yellow-300 font-black shadow-lg scale-[1.02]' 
                     : 'bg-black/50 border-emerald-900/60 text-slate-100 font-bold hover:bg-black/60'
                 }`;
                 div.innerHTML = `
-                    <span class="tracking-wide">${t}</span>
-                    <span class="font-black text-xl text-yellow-400 drop-shadow">${state.scores[i]}</span>
+                    <span class="tracking-wide text-sm md:text-base">${t}</span>
+                    <span class="font-black text-lg md:text-xl text-yellow-400 drop-shadow">${state.scores[i]}</span>
                 `;
                 board.appendChild(div);
             });
@@ -1239,7 +1280,7 @@
             rankDiv.innerHTML = '';
             ranking.forEach((r, i) => {
                 rankDiv.innerHTML += `
-                    <div class="flex justify-between items-center p-3 rounded-xl bg-emerald-950/60 border border-yellow-500/30">
+                    <div class="flex justify-between items-center p-2.5 rounded-xl bg-emerald-950/60 border border-yellow-500/30">
                         <span class="font-bold text-white">#${i+1} ${r.name}</span>
                         <span class="font-black text-xl text-yellow-400">${r.s} نقطة</span>
                     </div>`;
